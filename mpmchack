@@ -1,0 +1,48 @@
+32 bit Addition
+.MODEL SMALL
+.DATA
+ X DW 6011H, 5022H ; 32 bit addend
+ Y DW 0AAAAH, 0BBBBH ; 32 bit augend
+ SUM DW 2 DUP(0) ;
+ CARRY DB ? ;
+ .CODE
+ MOV AX,@DATA ;
+ MOV DS,AX
+ MOV AX,X+2 ;
+ MOV BX,Y+2 ;
+ ADD AX, BX
+ MOV SUM, AX
+ MOV AX, X
+ MOV BX, Y
+ ADC AX, BX ;
+ MOV SUM+2,AX
+ MOV AL, 00
+ ADC AL, 00
+ MOV CARRY,AL ;
+. MOV AH, 4CH ;
+ INT 21H
+ END
+
+Stepper motor
+
+#include <reg51.h>
+void main()
+{
+void delay(unsigned int);
+unsigned char x1[] = {0x03,0x09,0x0C,0x06};
+unsigned char i;
+P2 = 0x00;
+While(1)
+{
+for (j=0;j<=7;j++)
+ for(i=0;i<4;i++)
+{ P2 = x1[i];
+Delay(2000);
+}
+}
+}
+void delay(unsigned int n)
+{
+unsigned int i;
+for(i=0;i< n ;i++);
+}
